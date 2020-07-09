@@ -27,11 +27,11 @@ const Projects = () => {
       <Container>
         <div className="project-wrapper">
           <Title title="Projects" />
-          {projects.map((project) => {
+          {projects.map((project, i) => {
             const { title, info, info2, url, repo, img, id } = project;
 
-            return (
-              <Row key={id}>
+            function renderText() {
+              return (
                 <Col lg={4} sm={12}>
                   <Fade
                     left={isDesktop}
@@ -71,6 +71,11 @@ const Projects = () => {
                     </div>
                   </Fade>
                 </Col>
+              );
+            }
+
+            function renderImage() {
+              return (
                 <Col lg={8} sm={12}>
                   <Fade
                     right={isDesktop}
@@ -107,6 +112,21 @@ const Projects = () => {
                     </div>
                   </Fade>
                 </Col>
+              );
+            }
+
+            if (i % 2) {
+              return (
+                <Row key={id}>
+                  {renderText()}
+                  {renderImage()}
+                </Row>
+              );
+            }
+            return (
+              <Row key={id}>
+                {renderImage()}
+                {renderText()}
               </Row>
             );
           })}
